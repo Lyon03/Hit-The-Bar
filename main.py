@@ -5,8 +5,8 @@ import time
 
 pygame.init()
 
-music = pygame.mixer.music.load(r"C:\Users\Joelk\Desktop\Python\learningpygame\blahaj's favourite music.wav")
-bg = pygame.image.load(r"C:\Users\Joelk\Desktop\Python\learningpygame\shareMLH.png")
+music = pygame.mixer.music.load("blahaj's favourite music.wav")
+bg = pygame.image.load("shareMLH.png")
 
 vel = 50
 x = 100
