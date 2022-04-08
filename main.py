@@ -4,16 +4,22 @@ import datetime
 import time
 
 pygame.init()
-window = pygame.display.set_mode((600,600))
-clock = pygame.time.Clock()
+
+music = pygame.mixer.music.load(r"C:\Users\Joelk\Desktop\Python\learningpygame\blahaj's favourite music.wav")
+bg = pygame.image.load(r"C:\Users\Joelk\Desktop\Python\learningpygame\shareMLH.png")
 
 vel = 50
 x = 100
 y = 300
-rect = Rect(x, y, 200, 50)
 run = True
 total_seconds = 60
-score = 0
+count = 0
+pygame.display.set_caption("Hit The Bar")
+window = pygame.display.set_mode((600,600))
+clock = pygame.time.Clock()
+rect = Rect(x, y, 200, 50)
+font = pygame.font.SysFont("nunito", 30, True)
+
 while run:
     clock.tick(30)
     for event in pygame.event.get():
@@ -33,8 +39,13 @@ while run:
             vel *= -1
 
         rect.left += vel
-        window.fill((0,0,0))
-        pygame.draw.rect(window, (255,0,0), rect)   
+        window.fill((0,0,0))  
+        countText = font.render("Count: " + str(count), 1, (204, 255, 255))
+        musicText1 = font.render("Paused",1,(0,0,0))
+        musicText2 = font.render("Playing",1,(0,0,0))
+        window.blit(bg,(0,0)) 
+        pygame.draw.rect(window, (0,0,0), rect)
+        window.blit(countText, (440, 10))
         pygame.display.update() 
         total_seconds -= 1
 
@@ -44,5 +55,12 @@ while run:
                 total_seconds = 0
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if rect.collidepoint(pygame.mouse.get_pos()):
-                    score+=1
-                    print(score)
+                    count +=1 
+                    if count%2 == 1:
+                        pygame.mixer.music.play()
+                        window.blit(musicText2,(280,5))
+                    else:
+                        pygame.mixer.music.stop()
+                        window.blit(musicText1,(280,5))
+                    print(count)
+                    pygame.display.update() 
