@@ -13,7 +13,7 @@ y = 300
 rect = Rect(x, y, 200, 50)
 run = True
 total_seconds = 60
-
+score = 0
 while run:
     clock.tick(30)
     for event in pygame.event.get():
@@ -42,3 +42,7 @@ while run:
             if event.type == pygame.QUIT:
                 run = False
                 total_seconds = 0
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if rect.collidepoint(pygame.mouse.get_pos()):
+                    score+=1
+                    print(score)
